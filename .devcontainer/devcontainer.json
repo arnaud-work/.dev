@@ -1,8 +1,8 @@
 {
   "name": "Arnaud Work",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
-  "workspaceFolder": "/workspaces/arnaud-work-dev",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/arnaud-work-dev,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/.dev",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
   // Named volumes, not host bind mounts, for every sibling repo — a plain
   // "Rebuild Container" keeps whatever was cloned/committed here (same Docker
   // host/Codespace); only a full teardown (`docker volume rm`, deleted
