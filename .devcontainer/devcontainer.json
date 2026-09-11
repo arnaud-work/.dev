@@ -1,0 +1,67 @@
+{
+  "name": "Arnaud Work",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
+  "workspaceFolder": "/workspaces/.dev",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
+  // Named volumes, not host bind mounts, for every sibling repo — a plain
+  // "Rebuild Container" keeps whatever was cloned/committed here (same Docker
+  // host/Codespace); only a full teardown (`docker volume rm`, deleted
+  // Codespace) resets it to a fresh clone via setup-container.sh. This is
+  // also what makes the devcontainer work on GitHub Codespaces, which only
+  // ever checks out the one repo you launch the codespace from.
+  "mounts": [
+    "source=arnaud-work-repo-website,target=/workspaces/website,type=volume",
+    "source=arnaud-work-shell-history,target=/workspaces/.shell-history,type=volume",
+    "source=arnaud-work-vscode-server,target=/home/node/.vscode-server,type=volume"
+  ],
+  "containerEnv": {
+    "ARNAUD_WORK_ORG": "arnaud-work",
+    "ARNAUD_WORK_REPOS": ".dev website",
+    "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
+  },
+  // GH_TOKEN: forwards an arnaud-work-scoped host token into the container so
+  // gh and the GitHub VS Code extensions are authenticated out of the box.
+  // Set on the host: export GH_TOKEN_FOR_ARNAUD_WORK=<token>
+  "remoteEnv": {
+    "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git-lfs:1": {},
+    "ghcr.io/helpers4/devcontainer/shell-history-per-project:1": {},
+    "ghcr.io/helpers4/devcontainer/git-absorb:1": {},
+    "ghcr.io/helpers4/devcontainer/essential-dev:1": {},
+    "ghcr.io/helpers4/devcontainer/github-dev:1": {},
+    "ghcr.io/helpers4/devcontainer/typescript-dev:1": {},
+    "ghcr.io/helpers4/devcontainer/vite-plus:1": {},
+    "ghcr.io/helpers4/devcontainer/pnpm-store:1": {},
+    "ghcr.io/helpers4/devcontainer/package-auto-install:1": {
+      "autoDiscover": true
+    },
+    "ghcr.io/helpers4/devcontainer/claude-dev:1": {},
+    "ghcr.io/helpers4/devcontainer/peon-ping:1": {
+      "packs": "peasant_fr"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck"
+      ]
+    }
+  },
+  "forwardPorts": [5173, 8787],
+  "portsAttributes": {
+    "5173": {
+      "label": "website — Qwik dev server",
+      "onAutoForward": "notify"
+    },
+    "8787": {
+      "label": "website — wrangler dev",
+      "onAutoForward": "silent"
+    }
+  },
+  "remoteUser": "node",
+  "postCreateCommand": "bash .devcontainer/setup-container.sh"
+}
