@@ -33,7 +33,7 @@ pnpm serve          # wrangler dev — local Worker preview
 ## Common gotchas
 
 **Commit scopes**: always read `scopes.json` at the active repo root before choosing a scope.
-Never invent a scope that isn't listed. Full type→emoji mapping: `/workspaces/.dev/commit-convention.json`.
+Never invent a scope that isn't listed. Full type→emoji mapping: `/workspaces/arnaud-work-dev/commit-convention.json`.
 Use `/commit` (Claude Code slash command) to auto-generate a message from staged changes.
 
 **Git workflow**: branch, commit by subject (Conventional Commits), push only once it looks safe
