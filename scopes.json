@@ -3,5 +3,6 @@
   "devcontainer",
   "ai",
   "docs",
-  "ci"
+  "ci",
+  "deps"
 ]

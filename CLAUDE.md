@@ -17,7 +17,7 @@ way. **This is a safety net, not a substitute for pushing.**
 
 | Path | Repo | Role |
 | ---- | ---- | ---- |
-| `/workspaces/.dev` | `.dev` | Orchestration — canonical AGENTS.md, devcontainer |
+| `/workspaces/arnaud-work-dev` | `.dev` | Orchestration — canonical AGENTS.md, devcontainer |
 | `/workspaces/website` | `website` | arnaud.work landing page (Qwik + Cloudflare Workers) |
 
 ## Common commands (run from `website`)
@@ -36,6 +36,14 @@ pnpm serve          # wrangler dev — local Worker preview
 Never invent a scope that isn't listed. Full type→emoji mapping: `/workspaces/.dev/commit-convention.json`.
 Use `/commit` (Claude Code slash command) to auto-generate a message from staged changes.
 
-**Git workflow**: push straight to `main`, no branches/PRs — solo micro-entreprise, see
-AGENTS.md's Git workflow section. Claude may commit once authorized for the session, but
-never pushes on its own initiative — the user reviews and pushes.
+**Git workflow**: branch, commit by subject (Conventional Commits), push only once it looks safe
+(human review of the diff recommended first, ask if unsure), open a PR — never merge, merging is
+always a human decision. See AGENTS.md's Git Workflow section for the full policy and how a
+narrow per-task carve-out (e.g. "push straight to `main` for this one fix") can be granted.
+
+## AI persistence
+
+`~/.claude` is bind-mounted from a **per-devcontainer** volume and symlinked at
+every container start by `claude-dev` — isolated to this project, not shared
+with any other org's devcontainer. Memory, credentials, and settings survive
+rebuilds of this same devcontainer.
