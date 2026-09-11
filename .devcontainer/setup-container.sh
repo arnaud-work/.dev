@@ -34,7 +34,7 @@ if [ "$(git config --get gpg.format 2>/dev/null || true)" = "ssh" ]; then
 fi
 
 ORG="${ARNAUD_WORK_ORG:-arnaud-work}"
-REPOS="${ARNAUD_WORK_REPOS:-.dev website}"
+REPOS="${ARNAUD_WORK_REPOS:-website}"
 
 # ── Clone sibling repositories ──────────────────────────────────────────────────
 # Each sibling repo lives on its own named Docker volume (see devcontainer.json's

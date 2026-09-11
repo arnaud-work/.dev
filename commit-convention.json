@@ -51,12 +51,22 @@
       ]
     },
     {
+      "name": "test",
+      "description": "add or update tests",
+      "emoji": "✅",
+      "alternatives": [
+        { "emoji": "🧪", "when": "add failing test" },
+        { "emoji": "💚", "when": "fix CI tests" }
+      ]
+    },
+    {
       "name": "chore",
       "description": "maintenance, tooling, config",
       "emoji": "🔧",
       "alternatives": [
         { "emoji": "🔖", "when": "tag / release" },
         { "emoji": "📌", "when": "pin dependencies" },
+        { "emoji": "🩺", "when": "healthcheck" },
         { "emoji": "🙈", "when": "update .gitignore" }
       ]
     },

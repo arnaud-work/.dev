@@ -5,7 +5,7 @@
   ],
   "settings": {
     "conventionalCommits.gitmoji": true,
-    "conventionalCommits.scopes": ["workspace", "devcontainer", "ai", "docs", "ci"],
+    "conventionalCommits.scopes": ["workspace", "devcontainer", "ai", "docs", "ci", "deps"],
     "cSpell.words": ["arnaudwork", "gitmoji", "oxfmt", "oxlint", "qwik", "wrangler"]
   }
 }
