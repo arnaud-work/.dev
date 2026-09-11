@@ -1,8 +1,8 @@
 {
   "name": "Arnaud Work",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
-  "workspaceFolder": "/workspaces/.dev",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/arnaud-work-dev",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/arnaud-work-dev,type=bind,consistency=cached",
   // Named volumes, not host bind mounts, for every sibling repo — a plain
   // "Rebuild Container" keeps whatever was cloned/committed here (same Docker
   // host/Codespace); only a full teardown (`docker volume rm`, deleted
@@ -16,7 +16,7 @@
   ],
   "containerEnv": {
     "ARNAUD_WORK_ORG": "arnaud-work",
-    "ARNAUD_WORK_REPOS": ".dev website",
+    "ARNAUD_WORK_REPOS": "website",
     "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
   },
   // GH_TOKEN: forwards an arnaud-work-scoped host token into the container so
