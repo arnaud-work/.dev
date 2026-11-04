@@ -3,9 +3,6 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node:26",
   "workspaceFolder": "/workspaces/.dev",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
-  "mounts": [
-    "source=arnaud-work-vscode-server,target=/home/node/.vscode-server,type=volume"
-  ],
   "containerEnv": {
     "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
   },
@@ -55,6 +52,5 @@
       "onAutoForward": "silent"
     }
   },
-  "remoteUser": "node",
-  "postCreateCommand": "sudo chown node:node /home/node/.vscode-server 2>/dev/null || true"
+  "remoteUser": "node"
 }
