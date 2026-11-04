@@ -3,12 +3,11 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node:26",
   "workspaceFolder": "/workspaces/.dev",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
-  "containerEnv": {
-    "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
-  },
   // GH_TOKEN: forwards an arnaud-work-scoped host token into the container so
   // gh and the GitHub VS Code extensions are authenticated out of the box.
   // Set on the host: export GH_TOKEN_FOR_ARNAUD_WORK=<token>
+  // Secrets live in remoteEnv, not containerEnv: they are not baked into the container
+  // (docker run args / docker inspect) and a rotated token needs a reconnect, not a rebuild.
   "remoteEnv": {
     "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
   },
