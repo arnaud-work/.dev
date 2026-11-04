@@ -55,24 +55,17 @@ Full type→emoji mapping with alternatives: `commit-convention.json` at this re
 ## This Repository (.dev)
 
 **Purpose:** Orchestrate the Arnaud Work organization — multi-root VS Code workspace,
-devcontainer, canonical agent rules, cross-repo scripts.
+devcontainer, canonical agent rules.
 
 ### Project Structure
 
 ```
 .dev/
 ├── .devcontainer/
-│   ├── devcontainer.json       # Cross-repo dev environment
-│   └── setup-container.sh      # postCreateCommand: clones siblings into named volumes
+│   └── devcontainer.json       # Cross-repo dev environment (org-workspace clones siblings)
 ├── .claude/commands/commit.md  # /commit slash command
 ├── .vscode/settings.json       # Shared editor settings
-├── scripts/
-│   ├── repos.mjs               # Source of truth (reads repos.json)
-│   ├── run-each.mjs            # Run a pnpm script in every sibling repo
-│   └── git-each.mjs            # Run a git command in every sibling repo
 ├── arnaud-work.code-workspace  # Multi-root workspace + shared settings
-├── repos.json                  # List of sibling repos
-├── package.json                # Cross-repo orchestration scripts
 ├── commit-convention.json      # Full type→emoji mapping
 ├── scopes.json                 # Allowed commit scopes for this repo
 ├── AGENTS.md                   # This file (canonical org-wide rules)
@@ -81,15 +74,15 @@ devcontainer, canonical agent rules, cross-repo scripts.
 └── LICENSE                     # MIT
 ```
 
-Sibling repos are cloned as Docker volumes inside the devcontainer — see
-`.devcontainer/setup-container.sh`.
+Sibling repos are cloned by the `org-workspace` devcontainer feature — see
+`.devcontainer/devcontainer.json`.
 
 ### What NOT to do here
 
 - Do **not** add runtime code, packages, or build outputs. This repo is configuration only.
 - Do **not** duplicate per-repo agent rules — they live in their own `AGENTS.md`.
-- When adding a new sibling repo, update `repos.json`, `arnaud-work.code-workspace`, and
-  `.devcontainer/devcontainer.json` (`org-workspace` options) together.
+- When adding a new sibling repo, nothing to update by hand: `org-workspace` discovers the org repos and keeps
+  `arnaud-work.code-workspace` up to date (tune its options in `.devcontainer/devcontainer.json`).
 
 ## Git workflow
 
@@ -101,13 +94,11 @@ this stops being a one-person project.
 
 This repo's shape is reconciled from two sibling-org templates, since neither
 alone was a full match:
-- **`phillaire/.dev`** — the `repos.json` / `scripts/` (`git-each.mjs`,
-  `run-each.mjs`, `repos.mjs`) / `package.json` orchestration shape, and the
-  plain **MIT license** (`website` is a personal marketing site, not a hosted
+- **`phillaire/.dev`** — the plain **MIT license** (`website` is a personal marketing site, not a hosted
   network service — same reasoning as phillaire and levrier-tech, not
   tuxery's AGPL).
-- **`tuxery/.dev`** — the devcontainer shape (named Docker volumes + clone-on-
-  first-run, Codespaces-compatible, not host bind-mounts), `CLAUDE.md` +
+- **`tuxery/.dev`** — the devcontainer shape (`org-workspace` clones the siblings,
+  Codespaces-compatible, not host bind-mounts), `CLAUDE.md` +
   `.claude/commands/commit.md` + `commit-convention.json` pairing, since
   `website` is Qwik + Cloudflare Workers like `tuxery/app`.
 

@@ -1,10 +1,9 @@
 {
   "name": "Arnaud Work",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:26",
   "workspaceFolder": "/workspaces/.dev",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
   "mounts": [
-    "source=arnaud-work-shell-history,target=/workspaces/.shell-history,type=volume",
     "source=arnaud-work-vscode-server,target=/home/node/.vscode-server,type=volume"
   ],
   "containerEnv": {
@@ -21,7 +20,7 @@
       "autoDiscover": "public,private,internal,fork"
     },
     "ghcr.io/devcontainers/features/git-lfs:1": {},
-    "ghcr.io/helpers4/devcontainer/shell-history-per-project:1": {},
+    "ghcr.io/helpers4/devcontainer/shell-history:1": {},
     "ghcr.io/helpers4/devcontainer/git-absorb:1": {},
     "ghcr.io/helpers4/devcontainer/essential-dev:1": {},
     "ghcr.io/helpers4/devcontainer/github-dev:1": {},
@@ -34,9 +33,6 @@
     "ghcr.io/helpers4/devcontainer/claude-dev:1": {
       "remoteControl": true,
       "remoteControlAutoTrust": true
-    },
-    "ghcr.io/helpers4/devcontainer/peon-ping:1": {
-      "packs": "peasant_fr"
     }
   },
   "customizations": {
@@ -60,5 +56,5 @@
     }
   },
   "remoteUser": "node",
-  "postCreateCommand": "bash .devcontainer/setup-container.sh"
+  "postCreateCommand": "sudo chown node:node /home/node/.vscode-server 2>/dev/null || true"
 }

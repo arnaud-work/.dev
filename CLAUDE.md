@@ -5,13 +5,12 @@ Full canonical rules (commit format, restrictions, language) live in
 
 ## Workspace layout
 
-Sibling repos are cloned into named Docker volumes by
-`.devcontainer/setup-container.sh`'s `postCreateCommand` (not host
-bind-mounted — that's what makes the devcontainer work on GitHub Codespaces
-as well as local Docker Desktop/WSL2), and open together in
-`arnaud-work.code-workspace`. A plain "Rebuild Container" keeps
-uncommitted/unpushed work; only a full teardown (`docker volume rm`, deleted
-Codespace) resets a volume to a fresh clone of `origin/main`. `.dev` itself is
+Sibling repos are cloned by the `org-workspace` devcontainer feature into
+named Docker volumes (not host bind-mounted — that's what makes the
+devcontainer work on GitHub Codespaces as well as local Docker Desktop/WSL2),
+and open together in `arnaud-work.code-workspace`. A plain "Rebuild Container"
+keeps uncommitted/unpushed work; only a full teardown (`docker volume rm`,
+deleted Codespace) resets a volume to a fresh clone. `.dev` itself is
 the one repo that's genuinely host bind-mounted, so it's unaffected either
 way. **This is a safety net, not a substitute for pushing.**
 
