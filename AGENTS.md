@@ -89,7 +89,7 @@ Sibling repos are cloned as Docker volumes inside the devcontainer — see
 - Do **not** add runtime code, packages, or build outputs. This repo is configuration only.
 - Do **not** duplicate per-repo agent rules — they live in their own `AGENTS.md`.
 - When adding a new sibling repo, update `repos.json`, `arnaud-work.code-workspace`, and
-  `.devcontainer/devcontainer.json` (`ARNAUD_WORK_REPOS`) together.
+  `.devcontainer/devcontainer.json` (`org-workspace` options) together.
 
 ## Git workflow
 

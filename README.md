@@ -18,8 +18,8 @@ Dev workspace orchestrator for the [Arnaud Work](https://github.com/arnaud-work)
 ## Quick start — GitHub Codespaces (recommended)
 
 Open a Codespace on `arnaud-work/.dev` directly from GitHub. `postCreateCommand`
-clones every sibling repo listed in `.devcontainer/devcontainer.json`'s
-`ARNAUD_WORK_REPOS` into `/workspaces/<repo>` automatically.
+the `org-workspace` feature clones the org's repos (see
+`.devcontainer/devcontainer.json`) into `/workspaces/<repo>` automatically.
 
 Set a Codespaces secret or export a token on the host named
 `GH_TOKEN_FOR_ARNAUD_WORK` (not `GH_TOKEN`) before creating/reopening the
@@ -56,5 +56,5 @@ bash .devcontainer/test-container.sh
 ```
 
 When a new repository is added to the organization, update `repos.json`,
-`arnaud-work.code-workspace`, and `.devcontainer/devcontainer.json`
-(`ARNAUD_WORK_REPOS`) together.
+`arnaud-work.code-workspace`, and the `org-workspace` options in
+`.devcontainer/devcontainer.json` together.

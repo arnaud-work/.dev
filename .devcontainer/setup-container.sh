@@ -2,11 +2,10 @@
 set -euo pipefail
 
 # /workspaces itself, and every named-volume mount point declared in
-# devcontainer.json's "mounts" (the website volume, shell-history,
-# .vscode-server), come out root:root — only `.dev` (the bind-mounted
-# workspaceFolder) inherits node ownership from the mount. Without this,
-# `node` gets "Permission denied" writing into any of them.
-sudo chown node:node /workspaces /workspaces/website /workspaces/.shell-history \
+# devcontainer.json's "mounts" (shell-history, .vscode-server), come out
+# root:root — only `.dev` (the bind-mounted workspaceFolder) inherits node
+# ownership from the mount. Without this, `node` gets "Permission denied" writing into any of them.
+sudo chown node:node /workspaces /workspaces/.shell-history \
   /home/node/.vscode-server 2>/dev/null || true
 
 # ── Git commit signing (SSH format) ─────────────────────────────────────────────
@@ -33,33 +32,4 @@ if [ "$(git config --get gpg.format 2>/dev/null || true)" = "ssh" ]; then
   fi
 fi
 
-ORG="${ARNAUD_WORK_ORG:-arnaud-work}"
-REPOS="${ARNAUD_WORK_REPOS:-.dev website}"
-
-# ── Clone sibling repositories ──────────────────────────────────────────────────
-# Each sibling repo lives on its own named Docker volume (see devcontainer.json's
-# "mounts"), not a host bind mount — that's what makes GitHub Codespaces work
-# (it only ever checks out the one repo you launch the codespace from). This
-# loop only actually clones on a fresh volume (first-ever run, or after a full
-# teardown: `docker volume rm`, deleted Codespace).
-echo "Setting up ${ORG} workspace..."
-
-for repo in $REPOS; do
-  target="/workspaces/${repo}"
-
-  if [ -d "${target}/.git" ] || [ -n "$(ls -A "${target}" 2>/dev/null || true)" ]; then
-    echo "✓ ${repo}: already available"
-    continue
-  fi
-
-  echo "→ ${repo}: cloning sibling repository"
-  if command -v gh >/dev/null 2>&1; then
-    gh repo clone "${ORG}/${repo}" "${target}" || echo "! ${repo}: clone failed"
-  else
-    git clone "https://github.com/${ORG}/${repo}.git" "${target}" || echo "! ${repo}: clone failed"
-  fi
-done
-
-echo "✓ Workspace repos ready."
-echo ""
 echo "✓ Arnaud Work workspace ready."
