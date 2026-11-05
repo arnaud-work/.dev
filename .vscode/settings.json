@@ -1,4 +1,5 @@
 {
   "conventionalCommits.gitmoji": true,
-  "conventionalCommits.scopes": ["workspace", "devcontainer", "ai", "docs", "ci", "deps"]
+  "conventionalCommits.scopes": ["workspace", "devcontainer", "ai", "docs", "ci",
+    "deps"]
 }

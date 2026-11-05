@@ -7,7 +7,7 @@ Dev workspace orchestrator for the [Arnaud Work](https://github.com/arnaud-work)
 
 | File / folder | Purpose |
 | --- | --- |
-| `.devcontainer/` | Devcontainer (clones sibling repos into named volumes) |
+| `.devcontainer/` | Devcontainer (`org-workspace` clones the org repos) |
 | `.claude/commands/commit.md` | `/commit` slash command |
 | `.vscode/settings.json` | Shared editor settings |
 | `arnaud-work.code-workspace` | Multi-root VS Code workspace |
@@ -15,9 +15,8 @@ Dev workspace orchestrator for the [Arnaud Work](https://github.com/arnaud-work)
 
 ## Quick start — GitHub Codespaces (recommended)
 
-Open a Codespace on `arnaud-work/.dev` directly from GitHub. `postCreateCommand`
-clones every sibling repo listed in `.devcontainer/devcontainer.json`'s
-`ARNAUD_WORK_REPOS` into `/workspaces/<repo>` automatically.
+Open a Codespace on `arnaud-work/.dev` directly from GitHub. The `org-workspace` feature clones the org's repos (see
+`.devcontainer/devcontainer.json`) into `/workspaces/<repo>` automatically.
 
 Set a Codespaces secret or export a token on the host named
 `GH_TOKEN_FOR_ARNAUD_WORK` (not `GH_TOKEN`) before creating/reopening the
@@ -36,7 +35,7 @@ code .dev/arnaud-work.code-workspace
 ```
 
 Reopen `.dev` in the devcontainer — sibling repos are cloned automatically by
-`postCreateCommand`. Export `GH_TOKEN_FOR_ARNAUD_WORK` first (see above).
+the `org-workspace` feature. Export `GH_TOKEN_FOR_ARNAUD_WORK` first (see above).
 
 ## Verifying the environment
 
@@ -44,6 +43,6 @@ Reopen `.dev` in the devcontainer — sibling repos are cloned automatically by
 bash .devcontainer/test-container.sh
 ```
 
-When a new repository is added to the organization, update
-`arnaud-work.code-workspace` and `.devcontainer/devcontainer.json`
-(`ARNAUD_WORK_REPOS`) together.
+When a new repository is added to the organization, the `org-workspace` options in
+`.devcontainer/devcontainer.json` are enough: the repos are discovered from the org and
+`arnaud-work.code-workspace` is updated for you.
