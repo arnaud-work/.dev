@@ -123,6 +123,7 @@ the `/commit` slash command and mirrored in `.vscode/settings.json`):
 | `devcontainer` | `.devcontainer/` |
 | `ai` | Agent guidance (`AGENTS.md`, `CLAUDE.md`, `.claude/`), prompt files |
 | `docs` | `README.md` and other documentation |
+| `deps` | Dependency bumps |
 | `ci` | `.github/workflows/` (if any) |
 
 **Do not use a scope outside this list.** If a new top-level concern is added, update
