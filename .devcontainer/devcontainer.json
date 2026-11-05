@@ -1,33 +1,22 @@
 {
   "name": "Arnaud Work",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:26",
   "workspaceFolder": "/workspaces/.dev",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/.dev,type=bind,consistency=cached",
-  // Named volumes, not host bind mounts, for every sibling repo — a plain
-  // "Rebuild Container" keeps whatever was cloned/committed here (same Docker
-  // host/Codespace); only a full teardown (`docker volume rm`, deleted
-  // Codespace) resets it to a fresh clone via setup-container.sh. This is
-  // also what makes the devcontainer work on GitHub Codespaces, which only
-  // ever checks out the one repo you launch the codespace from.
-  "mounts": [
-    "source=arnaud-work-repo-website,target=/workspaces/website,type=volume",
-    "source=arnaud-work-shell-history,target=/workspaces/.shell-history,type=volume",
-    "source=arnaud-work-vscode-server,target=/home/node/.vscode-server,type=volume"
-  ],
-  "containerEnv": {
-    "ARNAUD_WORK_ORG": "arnaud-work",
-    "ARNAUD_WORK_REPOS": "website",
-    "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
-  },
   // GH_TOKEN: forwards an arnaud-work-scoped host token into the container so
   // gh and the GitHub VS Code extensions are authenticated out of the box.
   // Set on the host: export GH_TOKEN_FOR_ARNAUD_WORK=<token>
+  // Secrets live in remoteEnv, not containerEnv: they are not baked into the container
+  // (docker run args / docker inspect) and a rotated token needs a reconnect, not a rebuild.
   "remoteEnv": {
     "GH_TOKEN": "${localEnv:GH_TOKEN_FOR_ARNAUD_WORK}"
   },
   "features": {
+    "ghcr.io/helpers4/devcontainer/org-workspace:1": {
+      "autoDiscover": "public,private,internal,fork"
+    },
     "ghcr.io/devcontainers/features/git-lfs:1": {},
-    "ghcr.io/helpers4/devcontainer/shell-history-per-project:1": {},
+    "ghcr.io/helpers4/devcontainer/shell-history:1": {},
     "ghcr.io/helpers4/devcontainer/git-absorb:1": {},
     "ghcr.io/helpers4/devcontainer/essential-dev:1": {},
     "ghcr.io/helpers4/devcontainer/github-dev:1": {},
@@ -37,9 +26,9 @@
     "ghcr.io/helpers4/devcontainer/package-auto-install:1": {
       "autoDiscover": true
     },
-    "ghcr.io/helpers4/devcontainer/claude-dev:1": {},
-    "ghcr.io/helpers4/devcontainer/peon-ping:1": {
-      "packs": "peasant_fr"
+    "ghcr.io/helpers4/devcontainer/claude-dev:1": {
+      "remoteControl": true,
+      "remoteControlAutoTrust": true
     }
   },
   "customizations": {
@@ -62,6 +51,5 @@
       "onAutoForward": "silent"
     }
   },
-  "remoteUser": "node",
-  "postCreateCommand": "bash .devcontainer/setup-container.sh"
+  "remoteUser": "node"
 }

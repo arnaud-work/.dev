@@ -78,7 +78,7 @@ echo "── Workspace repos ──"
 if [ -w /workspaces ]; then
   ok "/workspaces — writable by $(whoami) (sibling repos can be cloned)"
 else
-  fail "/workspaces — not writable by $(whoami) (sibling clones will fail with 'Permission denied'; re-run setup-container.sh)"
+  fail "/workspaces — not writable by $(whoami) (sibling clones will fail with 'Permission denied')"
 fi
 
 for repo in .dev website; do
@@ -98,7 +98,7 @@ echo ""
 
 if [ "$FAIL" -gt 0 ]; then
   echo "  Critical items are missing."
-  echo "  Rebuild the container or re-run setup-container.sh"
+  echo "  Rebuild the container"
   exit 1
 fi
 exit 0
