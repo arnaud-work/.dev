@@ -68,7 +68,7 @@ echo "── Environment ──"
 if [ -n "${GH_TOKEN:-}" ]; then
   ok "GH_TOKEN — present"
 else
-  fail "GH_TOKEN — missing (export GH_TOKEN_FOR_ARNAUD_WORK on the host before reopening)"
+  fail "GH_TOKEN — missing (not loaded from OpenBao, see openbao-env status)"
 fi
 
 # ── Workspace repos ───────────────────────────────────────────────────────────

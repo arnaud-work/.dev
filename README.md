@@ -18,13 +18,12 @@ Dev workspace orchestrator for the [Arnaud Work](https://github.com/arnaud-work)
 Open a Codespace on `arnaud-work/.dev` directly from GitHub. The `org-workspace` feature clones the org's repos (see
 `.devcontainer/devcontainer.json`) into `/workspaces/<repo>` automatically.
 
-Set a Codespaces secret or export a token on the host named
-`GH_TOKEN_FOR_ARNAUD_WORK` (not `GH_TOKEN`) before creating/reopening the
-codespace, so `gh`/`git` can clone and push:
-
-```bash
-export GH_TOKEN_FOR_ARNAUD_WORK="$(gh auth token)"
-```
+Secrets (`GH_TOKEN`, …) come from OpenBao — `kv/orgs/arnaud-work`, plus `kv/shared/*` — through the
+[`openbao-env`](https://github.com/helpers4/devcontainer/tree/main/src/openbao-env) feature, into
+every process of the container (VS Code included). On fajro, `devc up arnaud-work` hands the
+container its credentials. In GitHub Codespaces, set the Codespaces secrets `BAO_ROLE_ID` and
+`BAO_SECRET_ID` (AppRole `arnaud-work`) and give the codespace Tailscale access: OpenBao is only
+reachable on the tailnet.
 
 ## Quick start — local (Docker Desktop / WSL2)
 
@@ -35,7 +34,7 @@ code .dev/arnaud-work.code-workspace
 ```
 
 Reopen `.dev` in the devcontainer — sibling repos are cloned automatically by
-the `org-workspace` feature. Export `GH_TOKEN_FOR_ARNAUD_WORK` first (see above).
+the `org-workspace` feature. The secrets come from OpenBao (see above).
 
 ## Verifying the environment
 
