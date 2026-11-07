@@ -1,11 +1,35 @@
 {
-  "folders": [
-    { "name": ".dev", "path": "." },
-    { "name": "website", "path": "../website" }
-  ],
-  "settings": {
-    "conventionalCommits.gitmoji": true,
-    "conventionalCommits.scopes": ["workspace", "devcontainer", "ai", "docs", "ci", "deps"],
-    "cSpell.words": ["arnaudwork", "gitmoji", "oxfmt", "oxlint", "qwik", "wrangler"]
-  }
+	"folders": [
+		{
+			"name": "🌍 .dev",
+			"path": "."
+		},
+		{
+			"name": "🌍 website",
+			"path": "../website"
+		},
+		{
+			"name": "🔒 .github",
+			"path": "../.github"
+		}
+	],
+	"settings": {
+		"conventionalCommits.gitmoji": true,
+		"conventionalCommits.scopes": [
+			"workspace",
+			"devcontainer",
+			"ai",
+			"docs",
+			"ci",
+			"deps"
+		],
+		"cSpell.words": [
+			"arnaudwork",
+			"gitmoji",
+			"oxfmt",
+			"oxlint",
+			"qwik",
+			"wrangler"
+		]
+	}
 }
