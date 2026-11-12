@@ -1,14 +1,14 @@
 {
   "features": {
     "ghcr.io/devcontainers/features/git-lfs:1": {
-      "version": "1.2.5",
-      "resolved": "ghcr.io/devcontainers/features/git-lfs@sha256:71c2b371cf12ab7fcec47cf17369c6f59156100dad9abf9e4c593049d789de72",
-      "integrity": "sha256:71c2b371cf12ab7fcec47cf17369c6f59156100dad9abf9e4c593049d789de72"
+      "version": "1.2.6",
+      "resolved": "ghcr.io/devcontainers/features/git-lfs@sha256:eb47c8dbb028872131e2edc2010d423219862b2362f339fc48682d0fcb2ad728",
+      "integrity": "sha256:eb47c8dbb028872131e2edc2010d423219862b2362f339fc48682d0fcb2ad728"
     },
     "ghcr.io/helpers4/devcontainer/claude-dev:1": {
-      "version": "1.4.2",
-      "resolved": "ghcr.io/helpers4/devcontainer/claude-dev@sha256:ac0d1c3a7e705a474477838f954e9ba111b7fca15b1f1a6448eacbf2b753ef8a",
-      "integrity": "sha256:ac0d1c3a7e705a474477838f954e9ba111b7fca15b1f1a6448eacbf2b753ef8a",
+      "version": "1.4.3",
+      "resolved": "ghcr.io/helpers4/devcontainer/claude-dev@sha256:c75b3501171e53dee9b526c0957dc2cc1c62395f6a9340ebc76881fc30c8afda",
+      "integrity": "sha256:c75b3501171e53dee9b526c0957dc2cc1c62395f6a9340ebc76881fc30c8afda",
       "dependsOn": [
         "ghcr.io/helpers4/devcontainer/helpers4-common:1"
       ]
