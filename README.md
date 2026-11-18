@@ -20,10 +20,11 @@ Open a Codespace on `arnaud-work/.dev` directly from GitHub. The `org-workspace`
 
 Secrets (`GH_TOKEN`, …) come from OpenBao — `kv/orgs/arnaud-work`, plus `kv/shared/*` — through the
 [`openbao-env`](https://github.com/helpers4/devcontainer/tree/main/src/openbao-env) feature, into
-every process of the container (VS Code included). On fajro, `devc up arnaud-work` hands the
+every process of the container (VS Code included). On fajro, `lar up arnaud-work` hands the
 container its credentials. In GitHub Codespaces, set the Codespaces secrets `BAO_ROLE_ID` and
 `BAO_SECRET_ID` (AppRole `arnaud-work`) and give the codespace Tailscale access: OpenBao is only
-reachable on the tailnet.
+reachable on the tailnet. To write a secret from inside the container (Claude included),
+`lar bao-grant arnaud-work` on fajro hands it a short-lived write token (AGENTS.md, "Secrets").
 
 ## Quick start — local (Docker Desktop / WSL2)
 
